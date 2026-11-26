@@ -61,6 +61,7 @@ h3 { margin: 0; color: var(--white); font-size: 24px; }
 .az-nav { display: grid; grid-template-columns: repeat(13, 1fr); gap: 7px; margin-top: 28px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .az-nav a { display: grid; place-items: center; min-height: 31px; border: 1px solid var(--line); color: #dce6f5; font-family: var(--mono); font-size: 11px; text-decoration: none; }
 .az-nav a:hover { border-color: var(--blue); color: var(--white); background: rgba(22, 119, 255, .22); }
+.az-nav a.disabled, .az-nav a[aria-disabled="true"] { color: var(--muted); opacity: 0.4; cursor: default; pointer-events: none; }
 .model-empty { display: grid; grid-template-columns: 74px 1fr auto; gap: 18px; align-items: center; padding-top: 25px; }
 .model-letter { display: grid; place-items: center; width: 58px; height: 58px; color: var(--white); background: linear-gradient(145deg, var(--blue), var(--purple)); font-family: var(--mono); font-size: 13px; font-weight: 900; }
 .model-empty h3 { font-size: 20px; }
