@@ -39,7 +39,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/eu_doc_records.json doc/eu-doc-red/index.html doc/eu-doc-red/*.pdf
+
+          git add data/eu_doc_records.json doc/eu-doc-red/index.html
+          if compgen -G "doc/eu-doc-red/*.pdf" > /dev/null; then
+            git add doc/eu-doc-red/*.pdf
+          fi
+
           if ! git diff --staged --quiet; then
             git commit -m "chore(eu-doc): split multi-model PDFs and sync index"
             git push
