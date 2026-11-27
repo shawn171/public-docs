@@ -1,4 +1,64 @@
 {
+  "DF700A_DF710A.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DF700A_DF710A_EU_Doc",
+        "download_file": "DF700A_DF710A.pdf",
+        "family": "RFID Reader",
+        "label": "DF700A series",
+        "models": "DF700A",
+        "published": "27 October 2026",
+        "source_file": "DF700A_DF710A.pdf"
+      },
+      {
+        "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DF700A_DF710A_EU_Doc",
+        "download_file": "DF700A_DF710A.pdf",
+        "family": "RFID Reader",
+        "label": "DF710A series",
+        "models": "DF710A",
+        "published": "27 October 2026",
+        "source_file": "DF700A_DF710A.pdf"
+      }
+    ],
+    "sha256": "4a5af9a1243b8719e1abb4616863da56a10f1d83f1777a06d411ac7e4c4409a3"
+  },
+  "DSP920.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP920_EU_Doc",
+        "download_file": "DSP920.pdf",
+        "family": "Display",
+        "label": "DSP920 series",
+        "models": "DSP920",
+        "published": "12 November 2026",
+        "source_file": "DSP920.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP920_EU_Doc",
+        "download_file": "DSP920.pdf",
+        "family": "Display",
+        "label": "DSP930 series",
+        "models": "DSP930",
+        "published": "12 November 2026",
+        "source_file": "DSP920.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP920_EU_Doc",
+        "download_file": "DSP920.pdf",
+        "family": "Display",
+        "label": "DSP940 series",
+        "models": "DSP940",
+        "published": "12 November 2026",
+        "source_file": "DSP920.pdf"
+      }
+    ],
+    "sha256": "589970bd6b6d2de682298ae52c2aec62e92b5aa72abf6b260cf652e4be50ac9f"
+  },
   "DSP920_DSP930_DSP940.pdf": {
     "records": [
       {
@@ -33,6 +93,141 @@
       }
     ],
     "sha256": "589970bd6b6d2de682298ae52c2aec62e92b5aa72abf6b260cf652e4be50ac9f"
+  },
+  "DSP930.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP930_EU_Doc",
+        "download_file": "DSP930.pdf",
+        "family": "Display",
+        "label": "DSP920 series",
+        "models": "DSP920",
+        "published": "12 November 2026",
+        "source_file": "DSP930.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP930_EU_Doc",
+        "download_file": "DSP930.pdf",
+        "family": "Display",
+        "label": "DSP930 series",
+        "models": "DSP930",
+        "published": "12 November 2026",
+        "source_file": "DSP930.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP930_EU_Doc",
+        "download_file": "DSP930.pdf",
+        "family": "Display",
+        "label": "DSP940 series",
+        "models": "DSP940",
+        "published": "12 November 2026",
+        "source_file": "DSP930.pdf"
+      }
+    ],
+    "sha256": "589970bd6b6d2de682298ae52c2aec62e92b5aa72abf6b260cf652e4be50ac9f"
+  },
+  "DSP940.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP940_EU_Doc",
+        "download_file": "DSP940.pdf",
+        "family": "Display",
+        "label": "DSP920 series",
+        "models": "DSP920",
+        "published": "12 November 2026",
+        "source_file": "DSP940.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP940_EU_Doc",
+        "download_file": "DSP940.pdf",
+        "family": "Display",
+        "label": "DSP930 series",
+        "models": "DSP930",
+        "published": "12 November 2026",
+        "source_file": "DSP940.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_DSP940_EU_Doc",
+        "download_file": "DSP940.pdf",
+        "family": "Display",
+        "label": "DSP940 series",
+        "models": "DSP940",
+        "published": "12 November 2026",
+        "source_file": "DSP940.pdf"
+      }
+    ],
+    "sha256": "589970bd6b6d2de682298ae52c2aec62e92b5aa72abf6b260cf652e4be50ac9f"
+  },
+  "ER750A.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_ER750A_EU_Doc",
+        "download_file": "ER750A.pdf",
+        "family": "RFID Reader",
+        "label": "ER750A series",
+        "models": "ER750A",
+        "published": "30 September 2026",
+        "source_file": "ER750A.pdf"
+      }
+    ],
+    "sha256": "6109d0b072710ff76fd38c683ebe0e87091676f2bff5cc61280114af8e30f77f"
+  },
+  "FL20.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_FL20_EU_Doc",
+        "download_file": "FL20.pdf",
+        "family": "RFID Reader",
+        "label": "FL20 series",
+        "models": "FL20",
+        "published": "2 October 2026",
+        "source_file": "FL20.pdf"
+      }
+    ],
+    "sha256": "992d9d13d9577c609542f8f79f377cb14e990918ded99a448cb242492fd34535"
+  },
+  "KB280_KB270_KB240.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc",
+        "download_file": "KB280_KB270_KB240.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB280 series",
+        "models": "KB280",
+        "published": "30 September 2026",
+        "source_file": "KB280_KB270_KB240.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc",
+        "download_file": "KB280_KB270_KB240.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB270 series",
+        "models": "KB270",
+        "published": "30 September 2026",
+        "source_file": "KB280_KB270_KB240.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc",
+        "download_file": "KB280_KB270_KB240.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB240 series",
+        "models": "KB240",
+        "published": "30 September 2026",
+        "source_file": "KB280_KB270_KB240.pdf"
+      }
+    ],
+    "sha256": "97da20379ad6a8817885b9699ab950d428b1fde084dbd5c20100717a574652a5"
   },
   "UHF880_without_WiFi.pdf": {
     "records": [

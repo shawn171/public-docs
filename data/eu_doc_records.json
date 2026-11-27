@@ -1,42 +1,112 @@
 [
   {
-    "models": "DSP920",
-    "label": "DSP920 series",
-    "family": "Display",
-    "published": "12 November 2026",
-    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
-    "source_file": "DSP920_DSP930_DSP940.pdf",
-    "download_file": "DSP920_DSP930_DSP940.pdf",
-    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc"
-  },
-  {
-    "models": "DSP930",
-    "label": "DSP930 series",
-    "family": "Display",
-    "published": "12 November 2026",
-    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
-    "source_file": "DSP920_DSP930_DSP940.pdf",
-    "download_file": "DSP920_DSP930_DSP940.pdf",
-    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc"
-  },
-  {
-    "models": "DSP940",
-    "label": "DSP940 series",
-    "family": "Display",
-    "published": "12 November 2026",
-    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
-    "source_file": "DSP920_DSP930_DSP940.pdf",
-    "download_file": "DSP920_DSP930_DSP940.pdf",
-    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc"
-  },
-  {
-    "models": "UHF880",
-    "label": "UHF880 series (without WiFi)",
+    "models": "DF700A",
+    "label": "DF700A series",
     "family": "RFID Reader",
-    "published": "4 November 2026",
+    "published": "27 October 2026",
     "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
-    "source_file": "UHF880_without_WiFi.pdf",
+    "source_file": "DF700A_DF710A.pdf",
+    "download_file": "DF700A_DF710A.pdf",
+    "document": "GIGA-TMS_DF700A_DF710A_EU_Doc"
+  },
+  {
+    "models": "DF710A",
+    "label": "DF710A series",
+    "family": "RFID Reader",
+    "published": "27 October 2026",
+    "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "DF700A_DF710A.pdf",
+    "download_file": "DF700A_DF710A.pdf",
+    "document": "GIGA-TMS_DF700A_DF710A_EU_Doc"
+  },
+  {
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc",
+    "download_file": "DSP920_DSP930_DSP940.pdf",
+    "family": "Display",
+    "label": "DSP920 series",
+    "models": "DSP920",
+    "published": "12 November 2026",
+    "source_file": "DSP920_DSP930_DSP940.pdf"
+  },
+  {
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc",
+    "download_file": "DSP920_DSP930_DSP940.pdf",
+    "family": "Display",
+    "label": "DSP930 series",
+    "models": "DSP930",
+    "published": "12 November 2026",
+    "source_file": "DSP920_DSP930_DSP940.pdf"
+  },
+  {
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc",
+    "download_file": "DSP920_DSP930_DSP940.pdf",
+    "family": "Display",
+    "label": "DSP940 series",
+    "models": "DSP940",
+    "published": "12 November 2026",
+    "source_file": "DSP920_DSP930_DSP940.pdf"
+  },
+  {
+    "models": "ER750A",
+    "label": "ER750A series",
+    "family": "RFID Reader",
+    "published": "30 September 2026",
+    "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "ER750A.pdf",
+    "download_file": "ER750A.pdf",
+    "document": "GIGA-TMS_ER750A_EU_Doc"
+  },
+  {
+    "models": "FL20",
+    "label": "FL20 series",
+    "family": "RFID Reader",
+    "published": "2 October 2026",
+    "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "FL20.pdf",
+    "download_file": "FL20.pdf",
+    "document": "GIGA-TMS_FL20_EU_Doc"
+  },
+  {
+    "models": "KB240",
+    "label": "KB240 series",
+    "family": "USB Programmable Keyboard",
+    "published": "30 September 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "KB280_KB270_KB240.pdf",
+    "download_file": "KB280_KB270_KB240.pdf",
+    "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc"
+  },
+  {
+    "models": "KB270",
+    "label": "KB270 series",
+    "family": "USB Programmable Keyboard",
+    "published": "30 September 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "KB280_KB270_KB240.pdf",
+    "download_file": "KB280_KB270_KB240.pdf",
+    "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc"
+  },
+  {
+    "models": "KB280",
+    "label": "KB280 series",
+    "family": "USB Programmable Keyboard",
+    "published": "30 September 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "KB280_KB270_KB240.pdf",
+    "download_file": "KB280_KB270_KB240.pdf",
+    "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc"
+  },
+  {
+    "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "document": "GIGA-TMS_UHF880_without_WiFi_EU_Doc",
     "download_file": "UHF880_without_WiFi.pdf",
-    "document": "GIGA-TMS_UHF880_without_WiFi_EU_Doc"
+    "family": "RFID Reader",
+    "label": "UHF880 series (without WiFi)",
+    "models": "UHF880",
+    "published": "4 November 2026",
+    "source_file": "UHF880_without_WiFi.pdf"
   }
 ]
