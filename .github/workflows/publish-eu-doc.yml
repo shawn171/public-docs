@@ -32,15 +32,15 @@ jobs:
             --doc-dir doc/eu-doc-red \
             --json-out data/eu_doc_records.json \
             --index-html doc/eu-doc-red/index.html \
+            --cache-file data/.eu_doc_parse_cache.json \
             --web-doc-dir doc/eu-doc-red
 
-      # 👇 加在這裡：上一步跑完檔案變更後，再 commit 並 push 回 repo
-      - name: Commit and push updated PDFs, JSON and index.html
+      - name: Commit and push updated PDFs, JSON, cache and index.html
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data/eu_doc_records.json doc/eu-doc-red/index.html
+          git add data/eu_doc_records.json data/.eu_doc_parse_cache.json doc/eu-doc-red/index.html
           if compgen -G "doc/eu-doc-red/*.pdf" > /dev/null; then
             git add doc/eu-doc-red/*.pdf
           fi
