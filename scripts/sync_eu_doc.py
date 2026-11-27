@@ -88,20 +88,36 @@ def extract_model_entries(text: str, fallback_stem: str) -> list[tuple[str, str]
         return [(fallback_code, f"{fallback_code} series")]
 
     raw_line = model_section.group(1).strip()
+    parts = [p.strip() for p in re.split(r"\s*(?:/|,|\n)\s*", raw_line) if p.strip()]
+
+    # 若最後一項帶有 "series" 尾碼，為前面純型號代碼的項目補上相同的 "series" 尾碼
+    trailing_suffix = ""
+    if parts:
+        suffix_match = re.search(r"\b(series)\s*$", parts[-1], flags=re.I)
+        if suffix_match:
+            trailing_suffix = suffix_match.group(1).lower()
+
     entries: list[tuple[str, str]] = []
     seen_codes: set[str] = set()
 
-    for part in re.split(r"\s*(?:/|,|\n)\s*", raw_line):
-        label = part.strip()
-        if not label:
-            continue
-        code_match = re.match(r"^([A-Za-z0-9][A-Za-z0-9.-]*)", label)
+    for idx, part in enumerate(parts):
+        code_match = re.match(r"^([A-Za-z0-9][A-Za-z0-9.-]*)", part)
         if not code_match:
             continue
         code = code_match.group(1).upper()
-        if code not in seen_codes:
-            seen_codes.add(code)
-            entries.append((code, label))
+        if code in seen_codes:
+            continue
+        seen_codes.add(code)
+
+        label = part
+        if (
+            trailing_suffix
+            and idx < len(parts) - 1
+            and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9.-]*", part)
+        ):
+            label = f"{part} {trailing_suffix}"
+
+        entries.append((code, label))
 
     if entries:
         return entries
@@ -137,14 +153,14 @@ def parse_pdf_to_records(pdf_path: Path) -> list[dict[str, str]]:
     records: list[dict[str, str]] = []
     for model_code, full_label in model_entries:
         records.append({
-            "source_file": pdf_path.name,
-            "download_file": pdf_path.name,
-            "document": document_name,
             "models": model_code,
             "label": full_label,
             "family": family,
             "published": published,
             "applicable_legislation": legislation,
+            "source_file": pdf_path.name,
+            "download_file": pdf_path.name,
+            "document": document_name,
         })
     return records
 
