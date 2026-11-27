@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "models": "DSP920",
+    "label": "DSP920 series",
+    "family": "Display",
+    "published": "12 November 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "DSP920_DSP930_DSP940.pdf",
+    "download_file": "DSP920_DSP930_DSP940.pdf",
+    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc"
+  },
+  {
+    "models": "DSP930",
+    "label": "DSP930 series",
+    "family": "Display",
+    "published": "12 November 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "DSP920_DSP930_DSP940.pdf",
+    "download_file": "DSP920_DSP930_DSP940.pdf",
+    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc"
+  },
+  {
+    "models": "DSP940",
+    "label": "DSP940 series",
+    "family": "Display",
+    "published": "12 November 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "DSP920_DSP930_DSP940.pdf",
+    "download_file": "DSP920_DSP930_DSP940.pdf",
+    "document": "GIGA-TMS_DSP920_DSP930_DSP940_EU_Doc"
+  },
+  {
+    "models": "UHF880",
+    "label": "UHF880 series (without WiFi)",
+    "family": "RFID Reader",
+    "published": "4 November 2026",
+    "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU",
+    "source_file": "UHF880_without_WiFi.pdf",
+    "download_file": "UHF880_without_WiFi.pdf",
+    "document": "GIGA-TMS_UHF880_without_WiFi_EU_Doc"
+  }
+]
