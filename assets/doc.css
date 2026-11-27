@@ -17,7 +17,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 body { margin: 0; color: var(--text); background: var(--black); font-family: var(--sans); line-height: 1.65; }
 a { color: inherit; }
 .shell { width: min(var(--max), calc(100% - 72px)); margin-inline: auto; }
