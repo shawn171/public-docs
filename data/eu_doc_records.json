@@ -70,6 +70,36 @@
     "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU"
   },
   {
+    "source_file": "KB280_KB270_KB240.pdf",
+    "download_file": "KB280_KB270_KB240.pdf",
+    "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc",
+    "models": "KB240",
+    "label": "KB240 series",
+    "family": "USB Programmable Keyboard",
+    "published": "30 September 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU"
+  },
+  {
+    "source_file": "KB280_KB270_KB240.pdf",
+    "download_file": "KB280_KB270_KB240.pdf",
+    "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc",
+    "models": "KB270",
+    "label": "KB270",
+    "family": "USB Programmable Keyboard",
+    "published": "30 September 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU"
+  },
+  {
+    "source_file": "KB280_KB270_KB240.pdf",
+    "download_file": "KB280_KB270_KB240.pdf",
+    "document": "GIGA-TMS_KB280_KB270_KB240_EU_Doc",
+    "models": "KB280",
+    "label": "KB280",
+    "family": "USB Programmable Keyboard",
+    "published": "30 September 2026",
+    "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU"
+  },
+  {
     "source_file": "UHF880_without_WiFi.pdf",
     "download_file": "UHF880_without_WiFi.pdf",
     "document": "GIGA-TMS_UHF880_without_WiFi_EU_Doc",
