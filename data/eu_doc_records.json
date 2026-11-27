@@ -1,8 +1,8 @@
 [
   {
-    "source_file": "DF700A_DF710A.pdf",
-    "download_file": "DF700A.pdf",
-    "document": "GIGA-TMS_DF700A_DF710A_EU_Doc",
+    "source_file": "DF710A.pdf",
+    "download_file": "DF710A.pdf",
+    "document": "GIGA-TMS_DF710A_EU_Doc",
     "models": "DF700A",
     "label": "DF700A series",
     "family": "RFID Reader",
@@ -10,9 +10,9 @@
     "applicable_legislation": "RED 2014/53/EU · RoHS 2011/65/EU · 2015/863/EU"
   },
   {
-    "source_file": "DF700A_DF710A.pdf",
+    "source_file": "DF710A.pdf",
     "download_file": "DF710A.pdf",
-    "document": "GIGA-TMS_DF700A_DF710A_EU_Doc",
+    "document": "GIGA-TMS_DF710A_EU_Doc",
     "models": "DF710A",
     "label": "DF710A series",
     "family": "RFID Reader",
