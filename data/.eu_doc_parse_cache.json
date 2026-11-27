@@ -244,6 +244,111 @@
     ],
     "sha256": "992d9d13d9577c609542f8f79f377cb14e990918ded99a448cb242492fd34535"
   },
+  "KB240.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB240_EU_Doc",
+        "download_file": "KB240.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB280 series",
+        "models": "KB280",
+        "published": "30 September 2026",
+        "source_file": "KB240.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB240_EU_Doc",
+        "download_file": "KB240.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB270 series",
+        "models": "KB270",
+        "published": "30 September 2026",
+        "source_file": "KB240.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB240_EU_Doc",
+        "download_file": "KB240.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB240 series",
+        "models": "KB240",
+        "published": "30 September 2026",
+        "source_file": "KB240.pdf"
+      }
+    ],
+    "sha256": "97da20379ad6a8817885b9699ab950d428b1fde084dbd5c20100717a574652a5"
+  },
+  "KB270.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB270_EU_Doc",
+        "download_file": "KB270.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB280 series",
+        "models": "KB280",
+        "published": "30 September 2026",
+        "source_file": "KB270.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB270_EU_Doc",
+        "download_file": "KB270.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB270 series",
+        "models": "KB270",
+        "published": "30 September 2026",
+        "source_file": "KB270.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB270_EU_Doc",
+        "download_file": "KB270.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB240 series",
+        "models": "KB240",
+        "published": "30 September 2026",
+        "source_file": "KB270.pdf"
+      }
+    ],
+    "sha256": "97da20379ad6a8817885b9699ab950d428b1fde084dbd5c20100717a574652a5"
+  },
+  "KB280.pdf": {
+    "records": [
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB280_EU_Doc",
+        "download_file": "KB280.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB280 series",
+        "models": "KB280",
+        "published": "30 September 2026",
+        "source_file": "KB280.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB280_EU_Doc",
+        "download_file": "KB280.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB270 series",
+        "models": "KB270",
+        "published": "30 September 2026",
+        "source_file": "KB280.pdf"
+      },
+      {
+        "applicable_legislation": "EMC 2014/30/EU · RoHS 2011/65/EU · 2015/863/EU",
+        "document": "GIGA-TMS_KB280_EU_Doc",
+        "download_file": "KB280.pdf",
+        "family": "USB Programmable Keyboard",
+        "label": "KB240 series",
+        "models": "KB240",
+        "published": "30 September 2026",
+        "source_file": "KB280.pdf"
+      }
+    ],
+    "sha256": "97da20379ad6a8817885b9699ab950d428b1fde084dbd5c20100717a574652a5"
+  },
   "KB280_KB270_KB240.pdf": {
     "records": [
       {
