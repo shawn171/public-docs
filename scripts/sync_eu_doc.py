@@ -56,7 +56,7 @@ def extract_model_entries(text: str, fallback_stem: str) -> list[tuple[str, str]
     entries: list[tuple[str, str]] = []
     seen_codes: set[str] = set()
 
-    for part in re.split(r"\s*/\s*", raw_line):
+    for part in re.split(r"\s*(?:/|,|\n)\s*", raw_line):
         label = part.strip()
         if not label:
             continue
@@ -171,6 +171,18 @@ def update_index_html(index_path: Path, records: list[dict[str, str]], web_doc_d
     index_path.write_text(updated, encoding="utf-8")
 
 
+def _record_priority(pdf_path: Path, recs: list[dict[str, str]]) -> int:
+    is_multi = len(recs) > 1
+    has_underscore = "_" in pdf_path.stem
+    if is_multi and has_underscore:
+        return 3
+    if is_multi:
+        return 2
+    if has_underscore:
+        return 1
+    return 0
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Parse PDFs in doc/eu-doc-red/, split multi-model PDFs, and update JSON + index.html")
     parser.add_argument("--doc-dir", type=Path, default=Path("doc/eu-doc-red"))
@@ -179,17 +191,25 @@ def main() -> None:
     parser.add_argument("--web-doc-dir", type=str, default="doc/eu-doc-red")
     args = parser.parse_args()
 
-    # 1. 先解析所有當層 PDF
+    # 1. 解析所有當層 PDF
     pdf_files = sorted(args.doc_dir.glob("*.pdf"))
     parsed_by_file: dict[Path, list[dict[str, str]]] = {
         pdf_path: parse_pdf_to_records(pdf_path) for pdf_path in pdf_files
     }
 
-    # 2. 優先處理多型號合併檔：複製出 <MODEL>.pdf，並記錄產出的別名檔清單
+    # 2. 依優先權合併紀錄（原始合併檔 > 其他多型號檔 > 單型號複本），並為多型號檔複製出 <MODEL>.pdf
     generated_aliases: set[str] = set()
-    by_model: dict[str, dict[str, str]] = {}
+    by_model: dict[str, tuple[int, dict[str, str]]] = {}
 
-    for pdf_path, recs in parsed_by_file.items():
+    # 先依據優先權由低到高排序處理，確保高優先權（如 DF700A_DF710A.pdf）複製並覆蓋最終結果
+    ordered_items = sorted(
+        parsed_by_file.items(),
+        key=lambda item: (_record_priority(item[0], item[1]), item[0].name.casefold()),
+    )
+
+    for pdf_path, recs in ordered_items:
+        prio = _record_priority(pdf_path, recs)
+
         if len(recs) > 1:
             for rec in recs:
                 model_code = rec["models"].strip().upper()
@@ -197,18 +217,14 @@ def main() -> None:
                 if alias_path.resolve() != pdf_path.resolve():
                     shutil.copyfile(pdf_path, alias_path)
                     generated_aliases.add(alias_path.name.casefold())
-                by_model[model_code] = rec
 
-    # 3. 再處理獨立的單型號 PDF（跳過剛剛由合併檔複製出來的別名檔）
-    for pdf_path, recs in parsed_by_file.items():
-        if len(recs) == 1:
-            if pdf_path.name.casefold() in generated_aliases:
-                continue
-            rec = recs[0]
+        for rec in recs:
             model_code = rec["models"].strip().upper()
-            by_model[model_code] = rec
+            current = by_model.get(model_code)
+            if current is None or prio >= current[0]:
+                by_model[model_code] = (prio, rec)
 
-    records = [by_model[k] for k in sorted(by_model, key=str.casefold)]
+    records = [by_model[k][1] for k in sorted(by_model, key=str.casefold)]
 
     args.json_out.parent.mkdir(parents=True, exist_ok=True)
     args.json_out.write_text(
