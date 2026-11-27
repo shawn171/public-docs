@@ -98,15 +98,12 @@ def parse_pdf_to_records(pdf_path: Path) -> list[dict[str, str]]:
     published = format_published_date(text)
     legislation = format_legislation(text)
     document_name = f"GIGA-TMS_{pdf_path.stem}_EU_Doc"
-    is_multi = len(model_entries) > 1
 
     records: list[dict[str, str]] = []
     for model_code, full_label in model_entries:
-        # 多型號合併檔拆分後，各自的下載檔為 <MODEL>.pdf；單型號則維持原檔名
-        download_file = f"{model_code}.pdf" if is_multi else pdf_path.name
         records.append({
             "source_file": pdf_path.name,
-            "download_file": download_file,
+            "download_file": pdf_path.name,
             "document": document_name,
             "models": model_code,
             "label": full_label,
@@ -127,7 +124,7 @@ def render_model_article(rec: dict[str, str], web_doc_dir: str) -> str:
     legislation = esc(rec["applicable_legislation"])
     document = esc(rec["document"])
     family = esc(rec["family"])
-    target_pdf = rec.get("download_file") or rec["source_file"]
+    target_pdf = rec["source_file"]
     pdf_href = f"/{web_doc_dir.strip('/')}/{esc(target_pdf)}"
 
     return (
@@ -136,11 +133,7 @@ def render_model_article(rec: dict[str, str], web_doc_dir: str) -> str:
         f'            <div class="record-main">\n'
         f'              <div class="record-heading"><h3>{label}</h3><span class="record-status">SIGNED · APPROVED</span></div>\n'
         f'              <p>EU Declaration of Conformity · {published}</p>\n'
-        f'              <dl class="record-meta">'
-        f'<div class="applicable-legislation"><dt>Applicable legislation</dt><dd>{legislation}</dd></div>'
-        f'<div><dt>Document</dt><dd>{document}</dd></div>'
-        f'<div><dt>Family</dt><dd>{family}</dd></div>'
-        f'</dl>\n'
+        f'              <dl class="record-meta"><div class="applicable-legislation"><dt>Applicable legislation</dt><dd>{legislation}</dd></div><div><dt>Document</dt><dd>{document}</dd></div><div><dt>Family</dt><dd>{family}</dd></div></dl>\n'
         f'            </div>\n'
         f'            <a class="record-download" href="{pdf_href}" download>Download PDF <b>↓</b></a>\n'
         f'          </article>'
