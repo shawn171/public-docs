@@ -78,16 +78,45 @@ def format_published_date(text: str) -> str:
 
 
 def extract_model_entries(text: str, fallback_stem: str) -> list[tuple[str, str]]:
-    model_section = re.search(
-        r"\bModel\s*[:：]?\s*\|?\s*([^\n]+)",
+    raw_line = ""
+
+    # 1. 優先尋找包含 "series" 的型號行（常見於多型號共用 series 的排版）
+    series_line_match = re.search(
+        r"(?:^|\n)\s*(?:\|\s*)?([^\n]*\bseries\b[^\n]*)",
         text,
         flags=re.I,
     )
-    if not model_section:
+
+    # 2. 若同一行就在 Model: 後面，直接取該行
+    inline_match = re.search(
+        r"\bModel\s*[:：]\s*\|?\s*([^\n]+)",
+        text,
+        flags=re.I,
+    )
+
+    if series_line_match:
+        candidate = series_line_match.group(1).strip()
+        # 避免誤抓整句說明文字，確保裡面有型號樣式或以 / 分隔
+        if "/" in candidate or re.search(r"\b[A-Za-z]{1,6}\d+[A-Za-z0-9-]*\b", candidate):
+            raw_line = candidate
+
+    if not raw_line and inline_match:
+        candidate = inline_match.group(1).strip()
+        # 若 inline 抓到的是純文字描述（如 "USB Programmable Keyboard"）且下方有含 "/" 的型號列，改取含 "/" 的列
+        slash_line_match = re.search(
+            r"(?:^|\n)\s*(?:\|\s*)?([A-Za-z0-9][A-Za-z0-9._-]*(?:\s*/\s*[A-Za-z0-9][A-Za-z0-9._-]*)+(?:\s+series)?)\s*(?:\n|$)",
+            text,
+            flags=re.I,
+        )
+        if slash_line_match and "/" not in candidate:
+            raw_line = slash_line_match.group(1).strip()
+        else:
+            raw_line = candidate
+
+    if not raw_line:
         fallback_code = fallback_stem.split("_")[0].upper()
         return [(fallback_code, f"{fallback_code} series")]
 
-    raw_line = model_section.group(1).strip()
     parts = [p.strip() for p in re.split(r"\s*(?:/|,|\n)\s*", raw_line) if p.strip()]
 
     # 若最後一項帶有 "series" 尾碼，為前面純型號代碼的項目補上相同的 "series" 尾碼
