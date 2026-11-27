@@ -3,12 +3,47 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import html
 import json
 import re
 import shutil
 from pathlib import Path
 from pypdf import PdfReader
+
+
+def compute_sha256(file_path: Path) -> str:
+    digest = hashlib.sha256()
+    with file_path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def load_parse_cache(cache_path: Path) -> dict[str, dict[str, object]]:
+    if not cache_path.exists():
+        return {}
+    try:
+        data = json.loads(cache_path.read_text(encoding="utf-8"))
+        if isinstance(data, dict):
+            return {
+                str(k): v
+                for k, v in data.items()
+                if isinstance(v, dict)
+                and isinstance(v.get("sha256"), str)
+                and isinstance(v.get("records"), list)
+            }
+    except (OSError, json.JSONDecodeError):
+        pass
+    return {}
+
+
+def save_parse_cache(cache_path: Path, cache: dict[str, dict[str, object]]) -> None:
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(
+        json.dumps(cache, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def extract_pdf_text(pdf_path: Path) -> str:
@@ -188,20 +223,51 @@ def main() -> None:
     parser.add_argument("--doc-dir", type=Path, default=Path("doc/eu-doc-red"))
     parser.add_argument("--json-out", type=Path, default=Path("data/eu_doc_records.json"))
     parser.add_argument("--index-html", type=Path, default=Path("doc/eu-doc-red/index.html"))
+    parser.add_argument("--cache-file", type=Path, default=Path("data/.eu_doc_parse_cache.json"))
     parser.add_argument("--web-doc-dir", type=str, default="doc/eu-doc-red")
     args = parser.parse_args()
 
-    # 1. 解析所有當層 PDF
-    pdf_files = sorted(args.doc_dir.glob("*.pdf"))
-    parsed_by_file: dict[Path, list[dict[str, str]]] = {
-        pdf_path: parse_pdf_to_records(pdf_path) for pdf_path in pdf_files
-    }
+    cache = load_parse_cache(args.cache_file)
+    next_cache: dict[str, dict[str, object]] = {}
 
-    # 2. 依優先權合併紀錄（原始合併檔 > 其他多型號檔 > 單型號複本），並為多型號檔複製出 <MODEL>.pdf
+    # 1. 依 SHA-256 判斷是否需要重新解析 PDF，並記錄來源是否有更新
+    pdf_files = sorted(args.doc_dir.glob("*.pdf"))
+    parsed_by_file: dict[Path, list[dict[str, str]]] = {}
+    source_changed_by_file: dict[Path, bool] = {}
+
+    parsed_count = 0
+    cached_count = 0
+
+    for pdf_path in pdf_files:
+        digest = compute_sha256(pdf_path)
+        cached_entry = cache.get(pdf_path.name)
+        is_unchanged = (
+            cached_entry is not None
+            and cached_entry.get("sha256") == digest
+            and isinstance(cached_entry.get("records"), list)
+        )
+
+        if is_unchanged:
+            recs = [dict(r) for r in cached_entry["records"]]  # type: ignore[union-attr]
+            source_changed = False
+            cached_count += 1
+        else:
+            recs = parse_pdf_to_records(pdf_path)
+            source_changed = True
+            parsed_count += 1
+
+        parsed_by_file[pdf_path] = recs
+        source_changed_by_file[pdf_path] = source_changed
+        next_cache[pdf_path.name] = {
+            "sha256": digest,
+            "records": recs,
+        }
+
+    # 2. 依優先權合併紀錄；僅在來源 PDF 有更新或目標別名檔不存在時才複製 <MODEL>.pdf
     generated_aliases: set[str] = set()
+    copied_count = 0
     by_model: dict[str, tuple[int, dict[str, str]]] = {}
 
-    # 先依據優先權由低到高排序處理，確保高優先權（如 DF700A_DF710A.pdf）複製並覆蓋最終結果
     ordered_items = sorted(
         parsed_by_file.items(),
         key=lambda item: (_record_priority(item[0], item[1]), item[0].name.casefold()),
@@ -209,13 +275,16 @@ def main() -> None:
 
     for pdf_path, recs in ordered_items:
         prio = _record_priority(pdf_path, recs)
+        source_changed = source_changed_by_file.get(pdf_path, True)
 
         if len(recs) > 1:
             for rec in recs:
                 model_code = rec["models"].strip().upper()
                 alias_path = args.doc_dir / f"{model_code}.pdf"
                 if alias_path.resolve() != pdf_path.resolve():
-                    shutil.copyfile(pdf_path, alias_path)
+                    if source_changed or not alias_path.exists():
+                        shutil.copyfile(pdf_path, alias_path)
+                        copied_count += 1
                     generated_aliases.add(alias_path.name.casefold())
 
         for rec in recs:
@@ -231,8 +300,13 @@ def main() -> None:
         json.dumps(records, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    save_parse_cache(args.cache_file, next_cache)
     update_index_html(args.index_html, records, args.web_doc_dir)
-    print(f"Processed {len(pdf_files)} PDF(s), generated {len(generated_aliases)} split copy(s), total {len(records)} record(s).")
+    print(
+        f"Processed {len(pdf_files)} PDF(s) (parsed={parsed_count}, cached={cached_count}), "
+        f"copied {copied_count} split file(s) ({len(generated_aliases)} alias(es) tracked), "
+        f"total {len(records)} record(s)."
+    )
 
 
 if __name__ == "__main__":
