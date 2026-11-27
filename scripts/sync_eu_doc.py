@@ -77,52 +77,64 @@ def format_published_date(text: str) -> str:
     return f"{parsed.day} {parsed.strftime('%B %Y')}"
 
 
+def _clean_model_line(line: str) -> str:
+    cleaned = re.sub(r"^\s*(?:\|\s*)?(?:Model\s*[:：]\s*)+", "", line.strip(), flags=re.I)
+    cleaned = re.sub(r"^\s*\|\s*", "", cleaned).strip()
+    return cleaned
+
+
 def extract_model_entries(text: str, fallback_stem: str) -> list[tuple[str, str]]:
     raw_line = ""
 
-    # 1. 優先尋找包含 "series" 的型號行（常見於多型號共用 series 的排版）
-    series_line_match = re.search(
-        r"(?:^|\n)\s*(?:\|\s*)?([^\n]*\bseries\b[^\n]*)",
+    # 1. 優先找 "Model:" 之後的內容（同一行或下一行）
+    after_model = re.search(
+        r"\bModel\s*[:：]\s*(?:\|\s*)?([^\n]*)(?:\n\s*(?:\|\s*)?([^\n]+))?",
         text,
         flags=re.I,
     )
+    if after_model:
+        first_part = _clean_model_line(after_model.group(1) or "")
+        second_part = _clean_model_line(after_model.group(2) or "")
 
-    # 2. 若同一行就在 Model: 後面，直接取該行
-    inline_match = re.search(
-        r"\bModel\s*[:：]\s*\|?\s*([^\n]+)",
-        text,
-        flags=re.I,
-    )
+        # 若第一行是產品描述（如 "USB Programmable Keyboard"）且第二行像型號，改用第二行
+        if second_part and (
+            "/" in second_part
+            or "series" in second_part.lower()
+            or re.search(r"\b[A-Za-z]{1,6}\d+[A-Za-z0-9-]*\b", second_part)
+        ) and "/" not in first_part and "series" not in first_part.lower():
+            raw_line = second_part
+        elif first_part:
+            raw_line = first_part
+        elif second_part:
+            raw_line = second_part
 
-    if series_line_match:
-        candidate = series_line_match.group(1).strip()
-        # 避免誤抓整句說明文字，確保裡面有型號樣式或以 / 分隔
-        if "/" in candidate or re.search(r"\b[A-Za-z]{1,6}\d+[A-Za-z0-9-]*\b", candidate):
-            raw_line = candidate
-
-    if not raw_line and inline_match:
-        candidate = inline_match.group(1).strip()
-        # 若 inline 抓到的是純文字描述（如 "USB Programmable Keyboard"）且下方有含 "/" 的型號列，改取含 "/" 的列
-        slash_line_match = re.search(
-            r"(?:^|\n)\s*(?:\|\s*)?([A-Za-z0-9][A-Za-z0-9._-]*(?:\s*/\s*[A-Za-z0-9][A-Za-z0-9._-]*)+(?:\s+series)?)\s*(?:\n|$)",
+    # 2. 若仍未抓到，退而求其次找包含 "series" 且含型號代碼的行
+    if not raw_line:
+        series_line_match = re.search(
+            r"(?:^|\n)\s*(?:\|\s*)?([^\n]*\bseries\b[^\n]*)",
             text,
             flags=re.I,
         )
-        if slash_line_match and "/" not in candidate:
-            raw_line = slash_line_match.group(1).strip()
-        else:
-            raw_line = candidate
+        if series_line_match:
+            candidate = _clean_model_line(series_line_match.group(1))
+            if "/" in candidate or re.search(r"\b[A-Za-z]{1,6}\d+[A-Za-z0-9-]*\b", candidate):
+                raw_line = candidate
 
+    raw_line = _clean_model_line(raw_line)
     if not raw_line:
         fallback_code = fallback_stem.split("_")[0].upper()
         return [(fallback_code, f"{fallback_code} series")]
 
-    parts = [p.strip() for p in re.split(r"\s*(?:/|,|\n)\s*", raw_line) if p.strip()]
+    parts = [
+        _clean_model_line(p)
+        for p in re.split(r"\s*(?:/|,|\n)\s*", raw_line)
+        if _clean_model_line(p)
+    ]
 
     # 若最後一項帶有 "series" 尾碼，為前面純型號代碼的項目補上相同的 "series" 尾碼
     trailing_suffix = ""
     if parts:
-        suffix_match = re.search(r"\b(series)\s*$", parts[-1], flags=re.I)
+        suffix_match = re.search(r"\b(series)\b", parts[-1], flags=re.I)
         if suffix_match:
             trailing_suffix = suffix_match.group(1).lower()
 
